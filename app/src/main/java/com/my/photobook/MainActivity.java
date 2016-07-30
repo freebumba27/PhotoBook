@@ -2,9 +2,13 @@ package com.my.photobook;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import com.easyandroidanimations.library.TransferAnimation;
 
 public class MainActivity extends AppCompatActivity {
     ImageView layout1image1;
@@ -17,19 +21,27 @@ public class MainActivity extends AppCompatActivity {
     ImageView layout2image4;
     LinearLayout layout1;
     LinearLayout layout2;
+    private FrameLayout coverLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        coverLayout = (FrameLayout) findViewById(R.id.coverLayout);
         layout1image1 = (ImageView) findViewById(R.id.layout1image1);
         layout1image2 = (ImageView) findViewById(R.id.layout1image2);
+        layout1image3 = (ImageView) findViewById(R.id.layout1image3);
+        layout1image4 = (ImageView) findViewById(R.id.layout1image4);
         layout2image1 = (ImageView) findViewById(R.id.layout2image1);
         layout2image2 = (ImageView) findViewById(R.id.layout2image2);
+        layout2image3 = (ImageView) findViewById(R.id.layout2image3);
+        layout2image4 = (ImageView) findViewById(R.id.layout2image4);
         layout1 = (LinearLayout) findViewById(R.id.layout1);
         layout2 = (LinearLayout) findViewById(R.id.layout2);
 
+        Log.d("AJTAG", "Width: " + layout1.getWidth());
+        Log.d("AJTAG", "Height: " + layout1.getHeight());
     }
 
     @Override
@@ -42,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
 
+        //layout1image1.animate().scaleX(.5f).scaleY(.5f).translationX(layout1.getWidth()/2).setDuration(1000);
 //        if (hasFocus) {
 //
 //
@@ -54,19 +67,39 @@ public class MainActivity extends AppCompatActivity {
 //            scale.play(scaleX).with(scaleY);
 //            scale.start();
 //
-//            // Moving image
-//            ObjectAnimator animX = ObjectAnimator.ofFloat(img1, "x", img2.getX() + (img2.getWidth() - img1.getWidth()) / 2);
-//            ObjectAnimator animY = ObjectAnimator.ofFloat(img1, "y", img2.getY() + (img2.getHeight() - img1.getHeight()) / 2);
-//            AnimatorSet animSetXY = new AnimatorSet();
-//            animSetXY.setDuration(2000);
-//            animSetXY.playTogether(animX, animY);
-//            animSetXY.start();
+        // Moving image
+//        ObjectAnimator animX = ObjectAnimator.ofFloat(layout1image1, "x", layout1.getWidth() / 2);
+//        //ObjectAnimator animY = ObjectAnimator.ofFloat(layout1image1, "y", layout1.getHeight()/2);
+//        AnimatorSet animSetXY = new AnimatorSet();
+//        animSetXY.setDuration(2000);
+//        animSetXY.playTogether(animX);
+//        animSetXY.start();
 //        }
     }
 
     public void shuffling(View view) {
 
-        layout1image1.animate().scaleX(100).scaleY(40).setDuration(1000);
+        new TransferAnimation(layout1image1)
+                .setDestinationView(layout2image1)
+                .setDuration(2000)
+                .animate();
+
+        new TransferAnimation(layout1image2)
+                .setDestinationView(layout2image2)
+                .setDuration(2000)
+                .animate();
+
+        new TransferAnimation(layout1image3)
+                .setDestinationView(layout2image3)
+                .setDuration(2000)
+                .animate();
+
+        new TransferAnimation(layout1image4)
+                .setDestinationView(layout2image4)
+                .setDuration(2000)
+                .animate();
+
+        //layout1image1.animate().scaleX(100).scaleY(40).setDuration(1000);
 //        // Scaling image
 //        ObjectAnimator scaleX = ObjectAnimator.ofFloat(layout1image1, "scaleX", (float) layout2image1.getWidth() / layout1image1.getWidth());
 //        ObjectAnimator scaleY = ObjectAnimator.ofFloat(layout1image1, "scaleY", (float) layout2image1.getHeight() / layout1image1.getHeight());

@@ -6,6 +6,7 @@
     tools:context="com.my.photobook.MainActivity">
 
     <FrameLayout
+        android:id="@+id/coverLayout"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_gravity="center"
